@@ -2,8 +2,8 @@ import Cabecera from "../components/Header";
 function Contacto() {
   return (
     <div className="container mt-5">
-      <Cabecera title="Contáctanos"/>
-      <form className="p-4 border rounded shadow-sm bg-light">
+      <Cabecera title="Contáctanos" />
+      <form className="p-4 border rounded shadow-sm bg-white">
         <div className="mb-3">
           <label className="form-label">Nombre</label>
           <input type="text" className="form-control" placeholder="Tu nombre" />
@@ -21,5 +21,6 @@ function Contacto() {
     </div>
   );
 }
+
 export default Contacto;
 
