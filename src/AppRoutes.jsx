@@ -5,6 +5,7 @@ import Contacto from "./pages/Contacto";
 import RegistrarVehiculo from "./pages/RegistroVehiculo";
 import ListarVehiculos from "./pages/ListarVehiculos";
 import DetalleVehiculo from "./pages/DetalleVehiculo";
+import PosiblesCompras from "./pages/PosiblesCompras";
 import MenuInferior from "./components/MenuInferior";
 
 function AppRoutes() {
@@ -18,6 +19,7 @@ function AppRoutes() {
           <Route path="/registroVehiculo" element={<RegistrarVehiculo />} />
           <Route path="/listarVehiculos" element={<ListarVehiculos />} />
           <Route path="/detalleVehiculo/:id" element={<DetalleVehiculo />} />
+          <Route path="/posiblesCompras" element={<PosiblesCompras />} />
         </Routes>
         <MenuInferior />
       </div>
