@@ -11,11 +11,60 @@ export const useVehiculos = () => {
   return context;
 };
 
+// Vehículos predeterminados
+const vehiculosIniciales = [
+  {
+    id: 1,
+    marca: "Toyota",
+    modelo: "Corolla",
+    precio: "15000000",
+    año: "2020",
+    descripcion: "Vehículo en excelente estado, con mantenciones al día. Motor 1.8L, transmisión automática, aire acondicionado."
+  },
+  {
+    id: 2,
+    marca: "Honda",
+    modelo: "Civic",
+    precio: "18000000",
+    año: "2021",
+    descripcion: "Sedán deportivo con tecnología avanzada, sistema de seguridad completo, pantalla táctil y cámara de reversa."
+  },
+  {
+    id: 3,
+    marca: "Chevrolet",
+    modelo: "Cruze",
+    precio: "14500000",
+    año: "2019",
+    descripcion: "Automóvil familiar espacioso, económico en consumo de combustible, ideal para la ciudad y carretera."
+  },
+  {
+    id: 4,
+    marca: "Mazda",
+    modelo: "3",
+    precio: "16500000",
+    año: "2022",
+    descripcion: "Diseño elegante y moderno, motor eficiente, sistema de infoentretenimiento de última generación."
+  },
+  {
+    id: 5,
+    marca: "Nissan",
+    modelo: "Sentra",
+    precio: "13500000",
+    año: "2018",
+    descripcion: "Vehículo confiable con bajo kilometraje, perfecto para quienes buscan calidad y economía."
+  }
+];
+
 export const VehiculosProvider = ({ children }) => {
-  // Cargar datos desde localStorage al iniciar
+  // Cargar datos desde localStorage o usar vehículos iniciales
   const [vehiculosInventario, setVehiculosInventario] = useState(() => {
     const saved = localStorage.getItem("vehiculosInventario");
-    return saved ? JSON.parse(saved) : [];
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Si no hay datos guardados o está vacío, usar vehículos iniciales
+      return parsed.length > 0 ? parsed : vehiculosIniciales;
+    }
+    return vehiculosIniciales;
   });
 
   const [vehiculosPosibleCompra, setVehiculosPosibleCompra] = useState(() => {
@@ -25,17 +74,11 @@ export const VehiculosProvider = ({ children }) => {
 
   // Guardar en localStorage cada vez que cambien los datos
   useEffect(() => {
-    localStorage.setItem(
-      "vehiculosInventario",
-      JSON.stringify(vehiculosInventario)
-    );
+    localStorage.setItem("vehiculosInventario", JSON.stringify(vehiculosInventario));
   }, [vehiculosInventario]);
 
   useEffect(() => {
-    localStorage.setItem(
-      "vehiculosPosibleCompra",
-      JSON.stringify(vehiculosPosibleCompra)
-    );
+    localStorage.setItem("vehiculosPosibleCompra", JSON.stringify(vehiculosPosibleCompra));
   }, [vehiculosPosibleCompra]);
 
   const agregarVehiculo = (vehiculo) => {
@@ -55,9 +98,7 @@ export const VehiculosProvider = ({ children }) => {
     const vehiculo = vehiculosPosibleCompra.find((v) => v.id === id);
     if (vehiculo) {
       setVehiculosInventario([...vehiculosInventario, vehiculo]);
-      setVehiculosPosibleCompra(
-        vehiculosPosibleCompra.filter((v) => v.id !== id)
-      );
+      setVehiculosPosibleCompra(vehiculosPosibleCompra.filter((v) => v.id !== id));
     }
   };
 
