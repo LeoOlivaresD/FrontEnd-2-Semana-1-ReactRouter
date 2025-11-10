@@ -184,7 +184,7 @@ function RegistrarVehiculo() {
               name="descripcion"
               value={form.descripcion}
               onChange={handleChange}
-              placeholder="Describe las características del vehículo (mínimo 10 caracteres)..."
+              placeholder="Describe las características del vehículo (mínimo 5 caracteres)..."
               rows="4"
               className={`form-control ${errores.descripcion ? "is-invalid" : ""}`}
             />
